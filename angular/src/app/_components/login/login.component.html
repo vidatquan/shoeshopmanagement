@@ -1,0 +1,32 @@
+﻿<div class="row" style="justify-content: space-around;">
+    <div class="container center" style="display: flex;justify-content: space-around;">
+        <div class="login-content col-12">
+            <form action="index.html" (ngSubmit)="onSubmit()">
+                <img src="assets/img/user.png">
+                <h2 class="title">Welcome</h2>
+                   <div class="input-div one">
+                      <div class="i">
+                              <i class="fa fa-user"></i>
+                      </div>
+                      <div class="div">
+                              <h5 *ngIf="!userName">Username</h5>
+                              <input type="text" name="UserName" [(ngModel)]="userName" class="input">
+                      </div>
+                   </div>
+                   <div class="input-div pass">
+                      <div class="i"> 
+                           <i class="fa fa-lock"></i>
+                      </div>
+                      <div class="div">
+                           <h5 *ngIf="!password">Password</h5>
+                           <input type="password" name="password" [(ngModel)]="password" class="input">
+                   </div>
+                </div>
+            
+                <button class="btn " style="height: 50px;padding-left: 2.5rem;padding-right: 2.5rem;">Đăng nhập</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+

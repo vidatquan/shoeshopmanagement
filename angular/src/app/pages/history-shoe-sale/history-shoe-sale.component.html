@@ -1,0 +1,70 @@
+<div id="container">
+    <div class="header">
+      <h6 class="card-header">
+        {{ "Tìm kiếm " }}
+    </h6>
+    <div class="row mt-1">
+        <div class="col-3 ml-2">
+            <tmss-datepicker [text]="'Từ ngày'" [disabled]="false" [(ngModel)]="fromDate"> </tmss-datepicker>
+        </div>
+        <div class="col-3">
+            <tmss-datepicker [text]="'Đến ngày'" [disabled]="false" [(ngModel)]="toDate"> </tmss-datepicker>
+        </div>
+        <div class="col-3">
+            <button class="tmss-btn btn-outline-primary mr-2 mt-1" (click)="onSearch()">
+                <i class="fa tmss-fa fa-search"></i>
+                <span class="ml-1">Tìm kiếm</span>
+            </button>
+            <button class="tmss-btn btn-outline-success mr-2 mt-1" (click)="exportToExcel()">
+                <i class="fa tmss-fa fa-download"></i>
+                <span class="ml-1">Xuất excel</span>
+              </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="main mt-2">
+    <h6 class="card-header">
+      {{ "Danh sách thu chi" }}
+    </h6>
+  
+    <div class="row mt-1">
+      <div class="col-12">
+        <grid-table [columnDefs]="columnsDef" [defaultColDef]="defaultColDef" [rowData]="rowData"
+          (callBackEvent)="callBackEvent($event)" [showPagination]="false" [height]="'400px'"
+          >
+        </grid-table>
+      </div>
+    </div>
+  
+  </div>
+
+  <div class="mt-2 text-right footer" style="background-color: aliceblue ;">
+    <div class="row">
+      <div class="col-8">
+        <h6>{{ "Tổng thu" }}:</h6>
+      </div>
+      <div class="col-3">
+        {{ tongThu| number }} VND
+      </div>
+    </div>
+    <div class="row mt-4">
+      <div class="col-8 ">
+        <h6>{{ "Tổng chi" }}:</h6>
+      </div>
+      <div class="col-3">
+        {{ tongChi | number}} VND
+      </div>
+    </div>
+    <div class="row mt-4">
+      <div class="col-8">
+        <h6>{{ "Số dư" }}:</h6>
+      </div>
+      <div class="col-3">
+        {{ soDu | number}} VND
+      </div>
+    </div>
+  
+  </div>
+  

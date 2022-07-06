@@ -1,0 +1,53 @@
+<div bsModal #modal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="createOrEditModal"
+  aria-hidden="true" >
+  <div class="modal-dialog tmss-modal-lg">
+    <div class="modal-content tmss-modal">
+      <div class="tmss-modal-header">
+        <h3 class="modal-title">
+          <b> Chọn mã giày </b>
+        </h3>
+        <button type="button" class="close" aria-label="Close" (click)="close()">
+          <span class="tmss-close" aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <div class="row mt-1">
+            <div class="col-11">
+                <tmss-text-input [text]="'Tìm kiếm'"  [(ngModel)]="code" (onSearch)="onGridReady(paginationParams)">
+                </tmss-text-input>
+              </div>
+            <div class="col-1">
+              <button class="tmss-btn btn-outline-primary mr-2 mt-1" (click)="onGridReady(paginationParams)">
+                <i class="fa tmss-fa fa-search"></i>
+                <span class="ml-1">Tìm kiếm</span>
+              </button>
+            </div>
+          </div>
+          <div class="row mt-1">
+            <div class="col-12">
+              <grid-table [columnDefs]="columnsDef" [defaultColDef]="defaultColDef" [rowData]="pagedRowData"
+                (callBackEvent)="callBackEvent($event)" (changePaginationParams)="changePaginationParams(paginationParams)"
+                [height]="'312px'" [paginationParams]="paginationParams" (onChangeSelection)="onChangeSelection($event)">
+              </grid-table>
+            </div>
+          </div>
+          
+      </div>
+
+      <div class="ui-g-12 text-right mt-1 mr-2 mb-1">
+        <button [disabled]="!selectedData" class="tmss-btn btn-outline-primary mr-2 mt-1 col-2" (click)="save()">
+          <i class="fa tmss-fa fa-check"></i>
+          <span class="ml-1">Xác nhận</span>
+        </button>
+        <button class="tmss-btn btn-outline-danger mr-2 mt-1 col-2" (click)="close()">
+          <i class="fa tmss-fa fa-times"></i>
+          <span class="ml-1">Hủy</span>
+        </button>
+      </div>
+      
+    </div>
+
+    
+  </div>
+</div>

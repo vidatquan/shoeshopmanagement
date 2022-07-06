@@ -1,0 +1,65 @@
+<div id="container">
+    <div class="header">
+        <h6 class="card-header">
+            {{ "Tìm kiếm " }}
+        </h6>
+        <div class="row mt-1">
+            <div class="col-3">
+                <tmss-datepicker [text]="'Từ ngày'" [disabled]="false" [(ngModel)]="fromDate"> </tmss-datepicker>
+            </div>
+            <div class="col-3">
+                <tmss-datepicker [text]="'Đến ngày'" [disabled]="false" [(ngModel)]="toDate"> </tmss-datepicker>
+            </div>
+        </div>
+        <div class="row mt-1">
+            <div class="col-3">
+                <tmss-text-input [text]="'Số ĐH'" [(ngModel)]="orderNoFilter"></tmss-text-input>
+            </div>
+            <div class="col-3">
+                <tmss-combobox [text]="'Trạng thái'" [items]="statusList" [(ngModel)]="status"></tmss-combobox>
+            </div>
+            <div class="col-4 text-center">
+                <button class="tmss-btn btn-outline-primary mr-2 mt-1" (click)="onGridReady(paginationParams)">
+                    <i class="fa tmss-fa fa-search"></i>
+                    <span class="ml-1">Tìm kiếm</span>
+                </button>
+                <button class="tmss-btn btn-outline-primary mr-2 mt-1" (click)="createOrderShoe()">
+                    <i class="fa fa-plus"></i>
+                    <span class="ml-1">Tạo đơn hàng</span>
+                </button>
+                <button [disabled]="selectedData == undefined || selectedData.OrderStatus != 0" class="tmss-btn btn-outline-danger mr-2 mt-1" (click)="cancelOrder()">
+                  <span class="tmss-fa ">&times;</span>
+                  <span class="ml-1">Huỷ đơn hàng</span>
+              </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="main mt-2">
+    <h6 class="card-header">
+      {{ "Danh sách đơn đặt hàng" }}
+    </h6>
+  
+    <div class="row mt-1">
+      <div class="col-12">
+        <grid-table [columnDefs]="columnsDef" [defaultColDef]="defaultColDef" [rowData]="pagedRowData"
+          (callBackEvent)="callBackEvent($event)" (changePaginationParams)="changePaginationParams(paginationParams)"
+          [height]="'200px'" [paginationParams]="paginationParams" (onChangeSelection)="onChangeSelection($event)">
+        </grid-table>
+      </div>
+    </div>
+    <div class="row mt-1">
+        <h6 class="card-header">
+            {{ "Chi tiết đơn hàng" }}
+          </h6>
+        <div class="col-12">
+          <grid-table [columnDefs]="orderDetailcolumnsDef" [defaultColDef]="defaultColDef" [rowData]="orderDetailList"
+            (callBackEvent)="callBackOrderDetailEvent($event)" [showPagination]="false"
+            [height]="'250px'" >
+          </grid-table>
+        </div>
+      </div>
+  </div>
+  
+  

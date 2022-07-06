@@ -1,0 +1,10 @@
+<div class="input-group" [ngClass]="className ? className : ''">
+    <span class="input-group-text left-text" *ngIf="text">
+        {{ text }}
+    </span>
+    <select style="height: 26.5px;" [class.required]="isRequired" class="form-control tmss-form-control" [(ngModel)]="value" [disabled]="isDisabled ? true : null" (change)="changeValue($event)">
+        <option *ngFor="let item of items" [value]="item[key]"
+            >{{ item[label] }}
+        </option>
+    </select>
+</div>

@@ -1,0 +1,57 @@
+<div class="primeng-paging-container" style="font-size: 13px; font-family: Arial, Helvetica, sans-serif;">
+    <div class="clearfix">
+        <div class="record-container">
+            <span class="total-records-count">
+                {{ fromRecord }} {{ "đến" }} {{ toRecord }} trong tổng số
+                {{ paginationParams.totalCount }}
+            </span>
+        </div>
+        <div class="nav-container" style="overflow: hidden;">
+            <span>
+                <button
+                    class="btn"
+                    (click)="goToPage(1)"
+                    [disabled]="paginationParams.pageNum === 1 || paginationParams.pageNum === 0"
+                >
+                <i class="fa fa-step-backward" style="font-size: 1rem;"></i>
+
+                </button>
+
+                <button
+                    class="btn"
+                    (click)="goToPrevious()"
+                    [disabled]="paginationParams.pageNum === 1 || paginationParams.pageNum === 0"
+                >
+                <i class="fa fa-caret-left"></i>
+                </button>
+                <span>
+                    Trang {{ this.totalCount }} / {{ this.getPage }}
+                </span>
+            <button class="btn" (click)="goToNext()" [disabled]="
+                        paginationParams.pageNum ===
+                        this.paginationParams.totalPage
+                    ">
+                    <i class="fa fa-caret-right"></i>
+                </button>
+            <button class="btn" (click)="goToPage(this.paginationParams.totalPage)" [disabled]="
+                        paginationParams.pageNum ===
+                        this.paginationParams.totalPage
+                    ">
+                    <i class="fa fa-step-forward" style="font-size: 1rem;"></i>
+                </button>
+
+            <span class="total-records-count ml-1">Hiển thị  </span>
+            <select (change)="onPageSizeChanged()" [(ngModel)]="pageSize">
+                    <option value="10" selected="">10</option>
+                    <option value="20">20</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                    <option value="500">500</option>
+                    <option value="1000">1000</option>
+                    <option value="5000">5000</option>
+                    <option value="10000">10000</option>
+                </select>
+            </span>
+        </div>
+    </div>
+</div>

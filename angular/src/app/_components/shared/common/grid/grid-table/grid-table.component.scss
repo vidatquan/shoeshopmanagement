@@ -1,0 +1,79 @@
+@import "node_modules/ag-grid-community/src/styles/ag-grid.scss";
+@import "node_modules/ag-grid-community/src/styles/ag-theme-alpine/sass/ag-theme-alpine-mixin.scss";
+.page-container {
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    font-size: 0.9rem;
+}
+
+.customer-warning {
+    background-color: sandybrown !important;
+}
+
+.customer-breach {
+    background-color: lightcoral !important;
+}
+
+.ag-theme-alpine .ag-header-cell,
+.ag-theme-alpine .ag-header-group-cell {
+    background-color: #dee9fc !important;
+    font-weight: 600;
+    border-bottom: 2px solid #ebedf2;
+    padding: inherit;
+}
+
+.ag-side-buttons {
+    width: 30px;
+}
+
+.ag-header-group-cell-label,
+.ag-header-cell-label {
+    justify-content: center;
+}
+
+.ag-theme-alpine .ag-header-cell {
+    text-align: center !important;
+}
+
+.ag-theme-alpine .ag-ltr .ag-cell {
+    border-right: 1px solid transparent;
+}
+
+.ag-cell-focus {
+    border: none !important;
+    background: transparent !important;
+}
+
+.ag-cell-range-selected {
+    background: transparent !important;
+}
+
+.ag-row-selected {
+    background-color: #008eff42 !important;
+}
+
+.ag-cell,
+.ag-header-cell {
+    font-size: 0.9rem !important;
+}
+
+.ag-theme-alpine {
+    @include ag-theme-alpine( ( odd-row-background-color: #e7f6ff, // Height of grid rows
+    row-height: ag-derived(grid-size, $times: 4, $plus: 4), // Height of header rows
+    header-height: ag-derived(row-height, $times: 1, $plus: 1), ));
+}
+
+.label {
+    color: #0f0f0f;
+}
+
+.value {
+    margin-right: 20px;
+    border: 1px solid lightgrey;
+    width: 50px;
+    display: inline-block;
+    text-align: right;
+    padding-right: 2px;
+    background: #eee;
+}

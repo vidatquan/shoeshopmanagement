@@ -1,0 +1,61 @@
+<div id="container">
+  <div class="header">
+      <h6 class="card-header">
+          {{ "Tìm kiếm " }}
+      </h6>
+      <div class="row mt-1">
+        <div class="col-3">
+          <tmss-text-input [text]="'Số ĐH'" [(ngModel)]="orderNoFilter"></tmss-text-input>
+      </div>
+          <div class="col-3">
+              <tmss-datepicker [text]="'Ngày nhận'" [disabled]="false" [(ngModel)]="orderDate"> </tmss-datepicker>
+          </div>
+          <button class="tmss-btn btn-outline-primary mr-2 mt-1" (click)="onGridReady(paginationParams)">
+            <i class="fa tmss-fa fa-search"></i>
+            <span class="ml-1">Tìm kiếm</span>
+        </button>
+      </div>
+  </div>
+</div>
+
+<div class="main mt-2">
+  <h6 class="card-header">
+    {{ "Danh sách đơn đặt hàng" }}
+  </h6>
+
+  <div class="row mt-1">
+    <div class="col-12">
+      <grid-table [columnDefs]="columnsDef" [defaultColDef]="defaultColDef" [rowData]="pagedRowData"
+        (callBackEvent)="callBackEvent($event)" (changePaginationParams)="changePaginationParams(paginationParams)"
+        [height]="'200px'" [paginationParams]="paginationParams" (onChangeSelection)="onChangeSelection($event)">
+      </grid-table>
+    </div>
+    <div class="col-12 text-right">
+      <button [disabled]="selectedData == undefined " class="tmss-btn btn-outline-primary mr-4 mt-1" (click)="shoeReceiveModal.show()">
+          <i class="fa fa-eye"></i>
+          <span class="ml-1">Xem đơn hàng</span>
+      </button>
+  </div>
+  </div>
+  <div class="row">
+      <h6 class="card-header">
+          {{ "Chi tiết đơn hàng" }}
+        </h6>
+      <div class="col-12">
+        <grid-table [columnDefs]="orderDetailcolumnsDef" [defaultColDef]="defaultColDef" [rowData]="orderDetailList"
+          (callBackEvent)="callBackOrderDetailEvent($event)" [showPagination]="false"
+          [height]="'250px'" >
+        </grid-table>
+      </div>
+    </div>
+</div>
+
+<app-shoe-receive-modal 
+  #shoeReceiveModal
+   [orderId]="selectedData?.Id" 
+   [orderDate]="selectedData?.OrderDate" 
+   [orderNo]="selectedData?.OrderNo" 
+   [orderDetailList]="orderDetailList"
+   (modalSave)="onGridReady(paginationParams)" >
+</app-shoe-receive-modal>
+

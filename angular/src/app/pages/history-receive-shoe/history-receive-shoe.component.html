@@ -1,0 +1,75 @@
+<div id="container">
+    <div class="header">
+        <h6 class="card-header">
+            {{ "Tìm kiếm " }}
+        </h6>
+        <div class="row mt-1">
+            <div class="col-3">
+                <tmss-text-input [text]="'Số PGH'" [(ngModel)]="receiveNo" (onSearch)="onGridReady(paginationParams)"></tmss-text-input>
+            </div>
+            <div class="col-3">
+                <tmss-datepicker [text]="'Từ ngày'" [disabled]="false" [(ngModel)]="fromDate"> </tmss-datepicker>
+            </div>
+            <div class="col-3">
+                <tmss-datepicker [text]="'Đến ngày'" [disabled]="false" [(ngModel)]="toDate"> </tmss-datepicker>
+            </div>
+            <div class="col-3">
+                <button class="tmss-btn btn-outline-primary mr-2 mt-1" (click)="onGridReady(paginationParams)">
+                    <i class="fa tmss-fa fa-search"></i>
+                    <span class="ml-1">Tìm kiếm</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="main mt-2">
+    <h6 class="card-header">
+        {{ "Danh sách đơn đặt hàng" }}
+    </h6>
+
+    <div class="row mt-1">
+        <div class="col-12">
+            <grid-table [columnDefs]="columnsDef" [defaultColDef]="defaultColDef" [rowData]="pagedRowData"
+                (callBackEvent)="callBackEvent($event)"
+                (changePaginationParams)="changePaginationParams(paginationParams)" [height]="'230px'"
+                [paginationParams]="paginationParams" (onChangeSelection)="onChangeSelection($event)">
+            </grid-table>
+        </div>
+    </div>
+    <div class="row mt-1">
+        <h6 class="card-header">
+            {{ "Chi tiết đơn hàng" }}
+        </h6>
+        <div class="col-12">
+            <grid-table [columnDefs]="orderDetailcolumnsDef" [defaultColDef]="defaultColDef"
+                [rowData]="receiveDetailList" (callBackEvent)="callBackReceiveDetailEvent($event)"
+                [showPagination]="false" [height]="'200px'">
+            </grid-table>
+        </div>
+    </div>
+    <div class="mt-1 text-right footer" style="background-color: aliceblue ;">
+        <div class="row ">
+            <!-- <div class="col-2"></div> -->
+            <div class="col-2">
+                <h6>{{ "Tổng tiền trước thuế" }}: </h6>
+            </div>
+            <div class="col-2 ">
+                <strong>{{ preTaxPrice| number }} VND</strong>
+            </div>
+            <div class="col-2 ">
+                <strong>{{"+"}}&emsp;{{"Tổng tiền thuế" }}: </strong>
+            </div>
+            <div class="col-2 ">
+                <strong>{{ taxPrice| number }} VND</strong>
+            </div>
+            <div class="col-2">
+                <h6>{{"="}}&emsp;{{"Tổng tiền sau thuế"}}: </h6>
+            </div>
+            <div class="col-2 text-center">
+                <strong>{{ totalPrice| number }} VND</strong>
+            </div>
+           
+        </div>
+    </div>
+</div>

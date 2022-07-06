@@ -1,0 +1,17 @@
+<div class="ui-g-12 ph-0" style="display: flex; ">
+    <button *ngIf="buttonDef" type="button" style="  display: flex;
+    align-items: center; justify-content: space-evenly;"
+        class="ag-in-cell-button {{ buttonDef.className ? buttonDef.className : 'tmss-btn btn-outline-primary' }}"
+        (click)="customFunction()" [disabled]="disableButton"
+        [ngClass]="buttonDefTwo ? 'ui-g-6 ui-md-6' : 'ui-g-12 ui-md-12 pb-0'">
+        <i *ngIf="buttonDef.iconName" class="{{ buttonDef.iconName }} tmss-fa"></i>
+        <span style="position: relative; top: -3px; margin-top: 4px;">{{ displayText }}</span>
+    </button>
+    <button *ngIf="buttonDefTwo" type="button" style="  display: flex;
+    align-items: center; justify-content: space-evenly;"
+        class="ag-in-cell-button {{ buttonDefTwo.className ? buttonDefTwo.className : 'tmss-btn btn-outline-primary' }}"
+        class="ui-g-6 ui-md-6" (click)="customFunctionTwo()" [disabled]="disableButtonTwo">
+        <i *ngIf="buttonDefTwo.iconName" class="{{ buttonDefTwo.iconName }} tmss-fa"></i>
+        <span style="position: relative; top: -3px;">{{ buttonDefTwo.text }}</span>
+    </button>
+</div>

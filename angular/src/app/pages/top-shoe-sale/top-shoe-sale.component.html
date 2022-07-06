@@ -1,0 +1,41 @@
+<div id="container">
+    <div class="header">
+        <h6 class="card-header">
+            {{ "Tìm kiếm " }}
+        </h6>
+        <div class="row mt-1">
+            <div class="col-3 ml-2">
+                <tmss-datepicker [text]="'Từ ngày'" [(ngModel)]="fromDate"> </tmss-datepicker>
+            </div>
+            <div class="col-3">
+                <tmss-datepicker [text]="'Đến ngày'" [(ngModel)]="toDate"> </tmss-datepicker>
+            </div>
+            <div class="col-3">
+                <button class="tmss-btn btn-outline-primary mr-2 mt-1" (click)="onSearch()">
+                    <i class="fa tmss-fa fa-search"></i>
+                    <span class="ml-1">Tìm kiếm</span>
+                </button>
+                <button class="tmss-btn btn-outline-success mr-2 mt-1" (click)="exportToExcel()">
+                    <i class="fa tmss-fa fa-download"></i>
+                    <span class="ml-1">Xuất excel</span>
+                  </button>
+            </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="main mt-2">
+    <h6 class="card-header">
+      {{ "Danh sách TOP 10 sản phẩm bán chạy" }}
+    </h6>
+  
+    <div class="row mt-1">
+      <div class="col-12">
+        <grid-table [columnDefs]="columnsDef" [defaultColDef]="defaultColDef" [rowData]="rowData"
+          (callBackEvent)="callBackEvent($event)" [showPagination]="false" [height]="'315px'"
+          >
+        </grid-table>
+      </div>
+    </div>
+  
+  </div>

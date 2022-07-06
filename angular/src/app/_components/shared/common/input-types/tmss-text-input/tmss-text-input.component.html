@@ -1,0 +1,8 @@
+<div class="input-group" [ngClass]="className ? className : ''">
+    <span class="input-group-text left-text" *ngIf="text">{{ text }}</span>
+    <input type="text" class="form-control tmss-form-control" [class.required]="isRequired" [readonly]="isReadonly" [disabled]="isDisabled ? true : null" *ngIf="!hideInput" [attr.maxlength]="maxLength ? maxLength : 999" [(ngModel)]="model" [attr.placeholder]="placeholder"
+        (input)="changeValue($event)" (keyup)="enter($event)" [value]="value" (ngModelChange)="onValueChange($event)">
+    <span *ngIf="showModal" (click)="onClickInputValue($event)" class="input-group-text right-text">
+    <i class="fa tmss-fa fas fa-external-link-alt"></i>
+  </span>
+</div>

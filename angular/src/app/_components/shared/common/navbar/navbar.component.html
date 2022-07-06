@@ -1,0 +1,173 @@
+<div class="nav-container" *ngIf="currentUser">
+  <div class="nav-header row">
+    <div class="header-icon col-10" style="padding-left: 22px;">
+      <i style="
+          align-items: center;
+          display: flex;
+          justify-content: center;
+          color: blcak;
+        " class="fa fa-bars" (click)="checkNav()"></i>
+      <h4 style="margin-left: 20px; margin-top: 10px;" routerLink="home">A&nbsp;D&nbsp;I&nbsp;D&nbsp;A&nbsp;S</h4>
+    </div>
+    <div class="header-icon col-2 text-center" style="text-align: center;cursor: pointer;">
+      <img (click)="drop.click()" [src]="url" alt="Avatar" style=" margin-left: 0px;
+        margin-right: 15px;display: flex;border:0.5px solid #555; border-radius: 50%; height: 30px; width: 30px;" >
+      <h5 style="font-size: 2.25rem;margin-top: 10px;margin-right: 10px;" (click)="drop.click()" >&frasl;</h5>
+      <h5 style="margin-right: 20px; margin-top: 10px;" (click)="drop.click()" >{{currentUser.FullName}}</h5>
+      <button type="button" data-toggle="dropdown"  #drop> </button>
+      <div class="dropdown-menu" style="visibility: visible;">
+        <a class="dropdown-item" (click)="showEditEmp()">Chỉnh sửa thông tin</a>
+        <a class="dropdown-item" (click)="logout()">Đăng xuất</a>
+      </div>
+    </div>
+
+  </div>
+  <nav class="main-menu" [ngStyle]="checkMenu ? { 'width.px': 250 } : ''">
+    <!-- <div style="text-align: center;cursor: pointer;" *ngIf="checkMenu" >
+      <img (click)="icon.click()" [src]="url" alt="Avatar" style=" margin-left: auto;
+        margin-right: auto;display: flex;border:0.5px solid #555; border-radius: 50%; height: 150px; width: 150px;" >
+      <h5 (click)="icon.click()" style="margin-top: 10px;">{{currentUser.FullName}}</h5>
+    </div> -->
+    <ul>
+      <li style="visibility: hidden;">
+        <a routerLink="log-info" #loginfo>
+        </a>
+      </li>
+      <li *ngIf="currentUser.RoleId == 1">
+        <a class="test" routerLink="employee">
+          <i class="fa fa-user fa-2x"></i>
+          <span class="nav-text"> Nhân viên </span>
+        </a>
+      </li>
+      <li >
+        <a routerLink="customer">
+          <i class="fa fa-group fa-2x"></i>
+          <span class="nav-text"> Thông tin khách hàng </span>
+        </a>
+      </li>
+      <!-- <li>
+        <a routerLink="order" >
+          <i class="fa fa-file-text fa-2x"></i>
+          <span class="nav-text"> {{currentUser.RoleId == 1 ? "Quản lý đơn hàng" : "Đơn được bàn giao"}} </span>
+        </a>
+      </li>
+      <li >
+        <a routerLink="payoff" >
+          <i class="fa fa-money fa-2x"></i>
+          <span class="nav-text"> Quản lý thưởng phạt</span>
+        </a>
+      </li>
+      <li >
+        <a routerLink="salary" >
+          <i class="fa fa-money fa-2x"></i>
+          <span class="nav-text"> Lương</span>
+        </a>
+      </li> -->
+      <li>
+        <a routerLink="shoe-info">
+          <i class="fa fa-file-text fa-2x"></i>
+          <span class="nav-text"> {{"Quản lý thông tin giày"}} </span>
+        </a>
+      </li>
+
+      <li>
+        <a (click)="check(1)">
+          <i class="fa fa-shopping-cart  fa-2x"></i>
+          <span class="nav-text"> Đặt hàng </span>
+          <i *ngIf="check1" class="fa fa-chevron-down"></i>
+          <i *ngIf="!check1" class="fa fa-chevron-right fa-2x"></i>
+        </a>
+      </li>
+      <li *ngIf="check1">
+        <a routerLink="shoe-order">
+          <i class="fa fa-book fa-2x"></i>
+          <span class="nav-text"> Đơn hàng đặt giày</span>
+        </a>
+      </li>
+      <li *ngIf="check1">
+        <a routerLink="create-shoe-order">
+          <i class="fa fa-btc fa-2x"></i>
+          <span class="nav-text"> Tạo đơn hàng đặt giày </span>
+        </a>
+      </li>
+
+      <li>
+        <a (click)="check(2)">
+          <i class="fa fa-check-square-o fa-2x"></i>
+          <span class="nav-text"> Nhận hàng </span>
+          <i *ngIf=" check2" class="fa fa-chevron-down"></i>
+          <i *ngIf=" !check2" class="fa fa-chevron-right fa-2x"></i>
+        </a>
+      </li>
+      <li *ngIf="check2">
+        <a routerLink="shoe-receive" >
+          <i class="fa fa-btc fa-2x"></i>
+          <span class="nav-text"> Nhận đơn hàng đặt giày</span>
+        </a>
+      </li>
+      <li *ngIf="check2">
+        <a routerLink="history-receive-shoe" >
+          <i class="fa fa-level-down fa-2x"></i>
+          <span class="nav-text"> Lịch sử nhập giày</span>
+        </a>
+      </li>
+      
+      <!-- <li>
+        <a (click)="check(3)">
+          <i class="fa fa-credit-card fa-2x"></i>
+          <span class="nav-text"> Xuất hàng </span>
+          <i *ngIf="check3" class="fa fa-chevron-down"></i>
+          <i *ngIf="!check3" class="fa fa-chevron-right fa-2x"></i>
+        </a>
+      </li>
+      <li *ngIf="check3">
+        <a routerLink="shoe-sale">
+          <i class="fa fa-money fa-2x"></i>
+          <span class="nav-text"> Bán giày</span>
+        </a>
+      </li>
+      <li *ngIf="check3">
+        <a routerLink="history-shoe-sale">
+          <i class="fa fa-level-up fa-2x"></i>
+          <span class="nav-text"> Lịch sử giá phụ tùng</span>
+        </a>
+      </li> -->
+      <li >
+        <a routerLink="shoe-sale">
+          <i class="fa fa-money fa-2x"></i>
+          <span class="nav-text"> Bán giày</span>
+        </a>
+      </li>
+      
+      <li>
+        <a (click)="check(4)">
+          <i class="fa fa-line-chart  fa-2x"></i>
+          <span class="nav-text"> Báo cáo </span>
+          <i *ngIf="check4" class="fa fa-chevron-down"></i>
+          <i *ngIf="!check4" class="fa fa-chevron-right fa-2x"></i>
+        </a>
+      </li>
+      <li *ngIf="check4">
+        <a routerLink="history-shoe-sale">
+          <i class="fa fa-bar-chart-o  fa-2x"></i>
+          <span class="nav-text"> Báo cáo thu chi</span>
+        </a>
+      </li>
+      <li *ngIf="check4">
+        <a routerLink="top-shoe-sale">
+          <i class="fa fa-bar-chart-o  fa-2x"></i>
+          <span class="nav-text"> Báo cáo sản phẩm bán chạy </span>
+        </a>
+      </li>
+    </ul>
+
+    <ul class="logout">
+      <li>
+        <a (click)="logout()" #logout1>
+          <i class="fa fa-power-off fa-2x"></i>
+          <span class="nav-text"> Đăng xuất </span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</div>

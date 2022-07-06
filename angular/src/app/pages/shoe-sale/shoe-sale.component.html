@@ -1,0 +1,132 @@
+<div id="container">
+    <div class="header">
+        <h6 class="card-header">
+            {{ "Tìm kiếm đơn hàng" }}
+        </h6>
+        <div class="row mt-1">
+            <div class="col-3">
+                <tmss-text-input [text]="'Số ĐH'" [(ngModel)]="shippingNoFilter"></tmss-text-input>
+            </div>
+            <!-- <div class="col-2">
+                <tmss-combobox [text]="'Trạng thái'" [items]="statusList" [(ngModel)]="status"></tmss-combobox>
+            </div> -->
+            <div class="col-3">
+                <tmss-datepicker [text]="'Từ ngày'" [disabled]="false" [(ngModel)]="fromDate"> </tmss-datepicker>
+            </div>
+            <div class="col-3">
+                <tmss-datepicker [text]="'Đến ngày'" [disabled]="false" [(ngModel)]="toDate"> </tmss-datepicker>
+            </div>
+            
+        </div>
+        <div class="row mt-1">
+            <div class="col-3">
+                <tmss-text-input [text]="'Tên KH'" [(ngModel)]="cusNameFilter"></tmss-text-input>
+            </div>
+            <div class="col-3">
+                <tmss-text-input [text]="'SĐT'" [(ngModel)]="cusTelFilter"></tmss-text-input>
+            </div>
+            
+            <div class="col-3 text-center">
+                <button class="tmss-btn btn-outline-primary mr-2 mt-1" (click)="onGridReady(paginationParams)">
+                    <i class="fa tmss-fa fa-search"></i>
+                    <span class="ml-1">Tìm kiếm</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="main mt-2">
+        <h6 class="card-header">
+            {{ "Danh sách đơn đặt hàng" }}
+        </h6>
+
+        <div class="row mt-1">
+            <div class="col-12">
+                <grid-table [columnDefs]="columnsDef" [defaultColDef]="defaultColDef" [rowData]="pagedRowData"
+                    (callBackEvent)="callBackEvent($event)"
+                    (changePaginationParams)="changePaginationParams(paginationParams)" [height]="'200px'"
+                    [paginationParams]="paginationParams" (onChangeSelection)="onChangeSelection($event)">
+                </grid-table>
+            </div>
+        </div>
+        <div class="ui-g-12 text-right ">
+            <button class="tmss-btn btn-outline-success mr-2 mt-1" (click)="exportExcel()">
+                <i class="fa tmss-fa fa-download"></i>
+                <span class="ml-1">In hoá đơn</span>
+            </button>
+            <button class="tmss-btn btn-outline-primary mr-2 mt-1" (click)="createOrEdit.show()">
+                <i class="fa tmss-fa fa-plus"></i>
+                <span class="ml-1">Thêm mới</span>
+            </button>
+            <!-- <button class="tmss-btn btn-outline-primary mr-2 mt-1" (click)="createOrEdit.show()"
+                [disabled]="!selectedData ">
+                <i class="fa tmss-fa fa-edit"></i>
+                <span class="ml-1">Sửa thông tin</span>
+            </button> -->
+            <!-- <button class="tmss-btn btn-outline-danger mr-2 mt-1" (click)="createOrEdit.show(3,selectedData)">
+                <i class="fa tmss-fa fa-trash-o"></i>
+                <span class="ml-1">Huỷ ĐH</span>
+            </button> -->
+        </div>
+        <h6 class="card-header">
+            {{ "Thông tin KH" }}
+        </h6>
+
+        <div class="row ">
+            <div class="col-3">
+                <tmss-text-input [disabled]="true" [text]="'Tên KH'" [(ngModel)]="cusName"></tmss-text-input>
+            </div>
+            <div class="col-3">
+                <tmss-text-input [disabled]="true" [text]="'SĐT'" [(ngModel)]="cusTel"></tmss-text-input>
+            </div>
+            <div class="col-4">
+                <tmss-text-input [disabled]="true" [text]="'Địa chỉ'" [(ngModel)]="cusAdd"></tmss-text-input>
+            </div>
+            <div class="col-2">
+                <tmss-text-input [disabled]="true" [text]="'Giảm giá'" [(ngModel)]="cusRate"></tmss-text-input>
+            </div>
+        </div>
+
+        <div class="row mt-1">
+            <h6 class="card-header">
+                {{ "Chi tiết đơn hàng" }}
+            </h6>
+            <div class="col-12">
+                <grid-table [columnDefs]="shoesDetailcolumnsDef" [defaultColDef]="defaultColDef"
+                    [rowData]="shippingDetailList" (callBackEvent)="callBackShoeDetailEvent($event)"
+                    [showPagination]="false" [height]="'200px'">
+                </grid-table>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="mt-1 text-right footer" style="background-color: aliceblue ;">
+        <div class="row ">
+            <div class="col-1"></div>
+            <div class="col-3">
+                {{ "Tổng tiền trước thuế" }}: 
+                <strong>{{ preTaxPrice| number }} </strong>
+            </div>
+            <div class="col-2">
+                <strong>&emsp;{{"+"}}&emsp;{{"Tổng tiền thuế" }}: </strong>
+                <strong>{{ taxPrice| number }} </strong>
+            </div>
+            <div class="col-2">
+                <strong>&emsp;{{"-"}}&emsp;{{"Giảm" }}: </strong>
+                <strong>{{ discount| number }} </strong>
+            </div>
+            <div class="col-3">
+                <strong>&emsp;{{"="}}&emsp;{{"Tổng tiền sau thuế"}}: </strong>
+                <strong>{{ totalPrice| number }} </strong>
+            </div>
+            <div class="col-1">
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<create-or-edit-shoe-sale #createOrEdit (modalSave)="onGridReady(paginationParams)"> </create-or-edit-shoe-sale>

@@ -1,0 +1,126 @@
+<div bsModal #modal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="createOrEditModal"
+    aria-hidden="true">
+    <div class="modal-dialog tmss-modal-lg">
+        <div class="modal-content tmss-modal">
+            <div class="tmss-modal-header">
+                <!-- <h3 class="modal-title">
+                    <b> Chọn mã giày </b>
+                </h3> -->
+                <button type="button" class="close" aria-label="Close" (click)="close()">
+                    <span class="tmss-close" aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body mt-1">
+                <h6 class="card-header">
+                    {{ "Thông tin KH" }}
+                </h6>
+
+                <div class="row">
+                    <div class="col-3">
+                        <tmss-text-input [disabled]="true" [text]="'Tên KH'" [(ngModel)]="customer.CusName" ></tmss-text-input>
+                    </div>
+                    <div class="col-3">
+                        <tmss-text-input [disabled]="confirmOrder" [isRequired]="!confirmOrder" [text]="'SĐT'" [(ngModel)]="customer.CusTel" (onSearch)="searchByEnter($event)"></tmss-text-input>
+                    </div>
+                    <div class="col-4">
+                        <tmss-text-input [disabled]="true" [text]="'Địa chỉ'" [(ngModel)]="customer.CusAdd"></tmss-text-input>
+                    </div>
+                    <div class="col-2">
+                        <tmss-text-input [disabled]="true" [text]="'Giảm giá'" [(ngModel)]="cusRate"></tmss-text-input>
+                    </div>
+                </div>
+
+                <div class="ui-g-12 text-right mt-1">
+                    <button class="tmss-btn btn-outline-primary mr-2 mt-1 col-2" (click)="add()">
+                        <i class="fa tmss-fa fa-plus"></i>
+                        <span class="ml-1">Thêm</span>
+                      </button>
+                      <button [disabled]="selectedData == undefined" class="tmss-btn btn-outline-danger mr-2 mt-1 col-2" (click)="deleteShoe()">
+                        <i class="fa tmss-fa fa-trash-o"></i>
+                        <span class="ml-1">Xoá</span>
+                      </button>
+                      <button class="tmss-btn btn-outline-primary mr-2 mt-1" (click)="refresh()">
+                        <i class="fa tmss-fa fa-refresh"></i>
+                        <span class="ml-1">Tạo mới đơn hàng</span>
+                      </button>
+                      <button class="tmss-btn btn-outline-primary mr-2 mt-1" (click)="confirm()">
+                        <i class="fa tmss-fa fa-shopping-cart"></i>
+                        <span class="ml-1">Xác nhận đơn hàng</span>
+                      </button>
+                      <button [disabled]="!confirmOrder" class="tmss-btn btn-outline-primary mr-2 mt-1" (click)="save()">
+                        <i class="fa tmss-fa fa-save"></i>
+                        <span class="ml-1">Lưu hoá đơn</span>
+                      </button>
+                    <!-- <button class="tmss-btn btn-outline-primary mr-2 mt-1" (click)="exportExcel()">
+                        <i class="fa tmss-fa fa-save"></i>
+                        <span class="ml-1">Lưu hoá đơn</span>
+                    </button> -->
+                </div>
+                <div class="row mt-1">
+                    <h6 class="card-header">
+                        {{ "Danh sách mua hàng" }}
+                    </h6>
+                    <div class="col-12">
+                        <grid-table [columnDefs]="columnsDef" [defaultColDef]="defaultColDef" [rowData]="pagedRowData"
+                            (callBackEvent)="callBackEvent($event)" [height]="'312px'" [showPagination]="false"
+                            (onChangeSelection)="onChangeSelection($event)" 
+                            (onSearch)="searchShoe($event)" (cellEditingStopped)="cellEditingStoppedShoe($event)">
+                        </grid-table>
+                    </div>
+                </div>
+
+
+
+            </div>
+
+
+
+            <div class="mt-1 mb-4 text-right footer" style="background-color: aliceblue ;">
+                <div class="row">
+                    <div class="col-3 text-left ml-4">
+                        <i>*&nbsp;{{ "Không áp dụng chính sách trả hàng hoặc hoàn tiền" }}</i>
+                    </div>
+                    <div class="col-5">
+                        <h6>{{ "Tổng tiền trước thuế" }}:</h6>
+                    </div>
+                    <div class="col-3">
+                        {{ preTaxPrice| number }} VND
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col-3 text-left ml-4">
+                        <i>*&nbsp;{{ "Khách hàng kiểm tra kĩ sản phẩm trước khi thanh toán" }}</i>
+                    </div>
+                    <div class="col-5 ">
+                        <h6>{{ "Tổng tiền thuế" }}:</h6>
+                    </div>
+                    <div class="col-3">
+                        {{ taxPrice | number}} VND
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col-8 ml-4">
+                        <h6>{{ "Giảm" }}:</h6>
+                    </div>
+                    <div class="col-3">
+                        {{ discount | number}} VND
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col-8 ml-4">
+                        <h6>{{ "Tổng tiền sau thuế" }}:</h6>
+                    </div>
+                    <div class="col-3">
+                        {{ totalPrice | number}} VND
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <customer-info-modal #cusInfoModal (modalSave)="patchCusInfo($event)"></customer-info-modal>
+
+    <app-shoe-info-modal #shoeInfoModal (modalSave)="patchShoeCode($event)"></app-shoe-info-modal>

@@ -1,0 +1,91 @@
+<div bsModal #modal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="createOrEditModal"
+  aria-hidden="true" style="margin-top: 3%;">
+  <div class="modal-dialog tmss-modal-lg">
+    <div class="modal-content tmss-modal">
+      <div class="tmss-modal-header">
+        <h6 class="modal-title">
+          <p *ngIf="action==2"> Thêm mới </p>
+          <p *ngIf="action==3"> Chỉnh sửa </p>
+        </h6>
+        <button type="button" class="close" aria-label="Close" (click)="close()">
+          <span class="tmss-close" aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+
+          <div class="row col-12">
+            <div class="col-3">
+              <div class="col-12">
+                <input #imgInput type="file" class="d-none" (change)="selectFile($event) ">
+                <div #imgContainer id="chooseImg" class=" col-12 "
+                        style="display: flex; border-radius: 50%; height: 160px; padding : 10px ;">
+                        <img [src]="url" alt="Avatar" style=" margin-left: auto;
+                        margin-right: auto;display: flex;border:0.5px solid #555; border-radius: 50%; height: 150px; width: 150px;" >
+                    </div>
+                <button *ngIf="action != 1" type="button" style=" margin-top: 2px;" class="col-12 tmss-btn btn-outline-primary"
+                    (click)="imgInput.click()">
+                    <i class="fa fa-upload mr-1"></i>
+                    <span>Chọn ảnh</span>
+                  </button>
+            </div>
+
+          </div>
+        <div class="col-9" style="padding-top: 20px;">
+          <div class="row mt-1">
+            <div class="col-4">
+              <tmss-text-input [isRequired]="action != 1" [disabled]="action == 1" [text]="'Mã Nhân viên'"  [(ngModel)]="employee.EmpCode"></tmss-text-input>
+            </div>
+            <div class="col-4">
+              <tmss-text-input [isRequired]="action != 1" [disabled]="action == 1" [text]="'Tên Nhân viên'" [(ngModel)]="employee.FullName"></tmss-text-input>
+            </div>
+            <div class="col-4">
+              <tmss-combobox [isRequired]="action != 1 && employee.RoleId != 1" [disabled]="action == 1 || employee.RoleId == 1" [text]="'Trạng thái'" [items]="statusList"   [(ngModel)]="employee.IsDeleted"></tmss-combobox>
+            </div>
+          </div>
+          <div class="row mt-4">
+            <div class="col-6">
+              <tmss-text-input [text]="'Email'"  [disabled]="action == 1" [(ngModel)]="employee.Email">
+              </tmss-text-input>
+            </div>
+            <div class="col-6">
+              <tmss-text-input [isRequired]="action != 1" [disabled]="action == 1" [text]="'SĐT'"  [(ngModel)]="employee.Tel"></tmss-text-input>
+            </div>
+            <!-- <div class="col-4">
+              <tmss-text-input [isRequired]="action != 1" [disabled]="action == 1" [text]="'Số chứng minh'" [(ngModel)]="employee.Cmnd"></tmss-text-input>
+            </div> -->
+          </div>
+          <div class="row mt-4">
+            <div class="col-6">
+              <tmss-text-input [text]="'Địa chỉ'"  [disabled]="action == 1" [(ngModel)]="employee.Address"></tmss-text-input>
+            </div>
+            
+            <div class="col-6">
+              <tmss-text-input [isRequired]="action != 1" [disabled]="action == 1" [text]="'Số chứng minh'" [(ngModel)]="employee.Cmnd"></tmss-text-input>
+            </div>
+          </div>
+          <div class="row mt-4">
+            <div class="col-6">
+              <tmss-text-input [isRequired]="action != 1" [disabled]="action == 1" [text]="'Tài khoản'" [(ngModel)]="employee.Username"></tmss-text-input>
+            </div>
+            <div class="col-6">
+              <tmss-text-input [isRequired]="action != 1"  [disabled]="action == 1"[text]="'Mật khẩu'" [(ngModel)]="employee.Password"></tmss-text-input>
+            </div>
+          </div>
+        </div>
+          </div>
+      </div>
+
+      <div class="ui-g-12 text-right mt-1 mr-2 mb-1">
+        <button *ngIf="action != 1" class="tmss-btn btn-outline-primary mr-2 mt-1 col-2" (click)="save()">
+          <i class="fa tmss-fa fa-save"></i>
+          <span class="ml-1">Lưu</span>
+        </button>
+        <button class="tmss-btn btn-outline-danger mr-2 mt-1 col-2" (click)="close()">
+          <i class="fa tmss-fa fa-times"></i>
+          <span class="ml-1">Hủy</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,10 @@
+<!-- Tmss DatePicker -->
+<div class="input-group remove-border-right-radius" [ngClass]="className ? className : ''" style="position: relative;">
+    <span *ngIf="text" class="input-group-text left-text">{{ text }}</span>
+    <input type="text" #datepicker="bsDatepicker" name="datePicker" class="form-control tmss-form-control" [class.required]="isRequired" [minDate]="minDate" [maxDate]="maxDate" [disabled]="isDisabled ? true : null" bsDatepicker datePickerMomentModifier [(ngModel)]="value"
+        autocomplete="off" (bsValueChange)="onValueChange($event)" [bsConfig]="{dateInputFormat:dateInputFormat}" />
+    <span class="input-group-text right-text" (click)="!isDisabled ? openDatepicker(): undefined" [attr.aria-expanded]="datepicker.isOpen">
+    <i class="fa fa-calendar" style="color: green;"></i>
+  </span>
+</div>
+<!-- End Tmss DatePicker -->

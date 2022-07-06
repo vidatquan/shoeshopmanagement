@@ -1,0 +1,73 @@
+<div bsModal #modal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="createOrEditModal"
+    aria-hidden="true">
+    <div class="modal-dialog tmss-modal-lg">
+        <div class="modal-content tmss-modal">
+            <div class="tmss-modal-header">
+                <h3 class="modal-title">
+                    <b> Nhận hàng thủ công </b>
+                </h3>
+                <button type="button" class="close" aria-label="Close" (click)="close()">
+                    <span class="tmss-close" aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <div class="row mt-1">
+                    <div class="col-3">
+                        <tmss-text-input [disabled]="true" [text]="'Số PGH'" [(ngModel)]="deliveryNo"></tmss-text-input>
+                    </div>
+                    <div class="col-3">
+                        <tmss-text-input [disabled]="true" [text]="'Số ĐH'" [(ngModel)]="orderNo"></tmss-text-input>
+                    </div>
+                    <div class="col-3">
+                        <tmss-text-input [disabled]="true" [text]="'Người nhận'" [(ngModel)]="fullName"></tmss-text-input>
+                      </div>
+                    <div class="col-3">
+                        <tmss-datepicker [disabled]="true" [text]="'Ngày nhận'" [disabled]="false"
+                            [(ngModel)]="receiveDate"> </tmss-datepicker>
+                    </div>
+                </div>
+                <div class="row mt-1">
+                    <div class="col-12">
+                        <h6 class="card-header">
+                            {{ "Chi tiết đơn nhận hàng" }}
+                          </h6>
+                        <grid-table [columnDefs]="columnsDef" [defaultColDef]="defaultColDef" [rowData]="pagedRowData"
+                            (callBackEvent)="callBackEvent($event)" [height]="'312px'" [showPagination]="false"
+                            (onChangeSelection)="onChangeSelection($event)">
+                        </grid-table>
+                    </div>
+                </div>
+
+            </div>
+            <div class="mt-1 text-right footer" style="background-color: aliceblue ;">
+                <div class="row">
+                    <div class="col-3">
+                        {{ "Tổng tiền trước thuế" }}:
+                        <strong>{{preTaxPrice  | number}}</strong>
+                    </div>
+                  
+                    <div class="col-3 ">
+                        {{ "+     Tổng tiền thuế" }}:
+                        <strong>{{taxPrice  | number}}</strong>
+                    </div>
+                    <div class="col-3">
+                        {{ "= Tổng tiền sau thuế" }}:
+                        <strong>{{totalPrice | number}}</strong>
+                    </div>
+                </div>
+            </div>
+            <div class="ui-g-12 text-right mt-2 mr-2 mb-1">
+                <button class="tmss-btn btn-outline-primary mr-2 mt-1 col-2"
+                    (click)="confirm()">
+                    <i class="fa tmss-fa fa-check"></i>
+                    <span class="ml-1">xác nhận đơn hàng</span>
+                </button>
+                <button [disabled]="!check" class="tmss-btn btn-outline-primary mr-2 mt-1 col-2" (click)="save()">
+                    <i class="fa tmss-fa fa-shopping-cart"></i>
+                    <span class="ml-1">Nhận hàng</span>
+                  </button>
+            </div>
+        </div>
+    </div>
+</div>

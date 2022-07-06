@@ -1,0 +1,12 @@
+<ag-grid-angular #agGrid [suppressHorizontalScroll]="isSuppressHorizontalScroll" [ngStyle]="style" class="ag-theme-alpine" [ngClass]="className ? className : ''" style="width: 100%; height: 100%; text-align: center;font-style: inherit;
+font-family: ui-monospace;" [domLayout]="autoHeight" [suppressRowClickSelection]="isSuppressRowClickSelection" [suppressHorizontalScroll]="disabledHorizontalScroll" [floatingFilter]="enableFilter" [suppressPropertyNamesCheck]="true" [suppressColumnVirtualisation]="true"
+    [groupSelectsChildren]="rowSelection === 'multiple'" [rowDragManaged]="true" [columnDefs]="columnDefs" [defaultColDef]="defaultColDef" [autoGroupColumnDef]="autoGroupColumnDef" [enableRangeSelection]="true" [pagination]="false" [animateRows]="true" [rowClassRules]="rowClassRules"
+    [rowData]="rowData" (gridReady)="onGridReady($event)" [frameworkComponents]="frameworkComponents" [singleClickEdit]="singleClickEdit" [suppressScrollOnNewData]="true" [suppressPaginationPanel]="true" [groupDefaultExpanded]="groupDefaultExpanded" [groupUseEntireRow]="groupUseEntireRow"
+    [suppressMoveWhenRowDragging]="suppressMoveWhenRowDragging" (rowDragEnter)="onRowDragEnter($event)" (rowDragEnd)="onRowDragEnd($event)" (rowDragMove)="onRowDragMove($event)" (rowDragLeave)="onRowDragLeave($event)" [suppressDragLeaveHidesColumns]="true"
+    [tabToNextCell]="true" [suppressCellSelection]="true" (selectionChanged)="onSelectionChanged($event)" (rowClicked)="onRowClicked($event)" (rowFocused)="onRowFocused($event)" [rowSelection]="rowSelection" (cellDoubleClicked)="cellDoubleClickedEvent($event)"
+    (cellValueChanged)="onCellValueChanged($event)" (rowValueChanged)="onRowValueChanged($event)" (cellEditingStarted)="onCellEditingStarted($event)" (cellEditingStopped)="onCellEditingStopped($event)" [stopEditingWhenGridLosesFocus]="true" [groupMultiAutoColumn]="true"
+    (cellFocused)="onCellFocused($event)" (focus)="focus($event)" [masterDetail]="masterDetail" [detailCellRendererParams]="detailCellRendererParams" [rowModelType]="'clientSide'" (keyup)="onKeyUp($event)" (keydown)="onKeyDown($event)" [pinnedBottomRowData]="pinnedBottomRowData"
+    [getRowStyle]="getRowStyle" [sideBar]="sideBar" (cellMouseOver)="onCellMouseOver($event)" [detailRowHeight]="detailRowHeight" (cellKeyPress)="onCellKeyPress($event)">
+</ag-grid-angular>
+<grid-pagination *ngIf="showPagination" [pageSize]="paginationParams?.pageSize" [gridApi]="gridApi" [paginationParams]="paginationParams" (pageChangedEvent)="changePage($event)">
+</grid-pagination>
